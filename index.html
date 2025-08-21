@@ -1,4 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUAR | Semi-Jóias de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://sdk.mercadopago.com/js/v2"></script> <!-- SDK do Mercado Pago -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+        
+        .product-overlay {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #d4b785;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .brand-gold {
+            color: #d4b785;
+        }
 
+        /* Styles for the cart */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #d4b785;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden by default */
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-3xl font-bold brand-gold">LUAR</div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-gray-900">Início</a>
+                    <a href="#collection" class="nav-link text-gray-700 hover:text-gray-900">Coleções</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-gray-900">Sobre</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-gray-900">Contato</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fas fa-search"></i></a>
+                    <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fas fa-user"></i></a>
+                    <div class="relative">
+                        <button id="cart-button" class="text-gray-700 hover:text-gray-900">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <div id="cart" class="cart">
+                            <h4 class="font-bold">Itens no Carrinho</h4>
+                            <ul id="cart-items" class="text-gray-600"></ul>
+                            <button id="checkout-button" class="mt-2 bg-brand-gold text-white px-4 py-2 rounded">Finalizar Compra</button>
+                        </div>
+                    </div>
+                    <button class="md:hidden text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center">
+        <img src="https://placehold.co/1920x1080" alt="Elegant gold and diamond jewelry arranged artistically on a marble surface with soft lighting" class="absolute w-full h-full object-cover" />
+        
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-white">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">Brilhe com <span class="brand-gold">Elegância</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl">Semi-jóias que capturam a essência do requinte contemporâneo.</p>
+            <a href="#collection" class="bg-transparent border-2 border-white text-white px-8 py-3 uppercase tracking-wider hover:bg-white hover:text-gray-900 transition duration-300">Explore a Coleção</a>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section id="collection" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Coleções <span class="brand-gold">Exclusivas</span></h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Peças meticulosamente criadas para quem busca sofisticação e qualidade</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Collection 1 -->
+                <div class="bg-white shadow-md rounded overflow-hidden group">
+                    <div class="relative">
+                        <img src="https://placehold.co/800x1000" alt="Delicate gold necklace with intricate pendant design displayed in luxury jewelry box" class="w-full h-96 object-cover" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <a href="#" class="bg-white text-gray-900 px-6 py-2 uppercase tracking-wider">Ver Coleção</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Coleção Aurora</h3>
+                        <p class="text-gray-600 mb-4">Peças que capturam a luz como o nascer do sol</p>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Aurora')">
+                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Collection 2 -->
+                <div class="bg-white shadow-md rounded overflow-hidden group">
+                    <div class="relative">
+                        <img src="https://placehold.co/800x1000" alt="Modern geometric earrings in gold and silver tones arranged creatively on velvet surface" class="w-full h-96 object-cover" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <a href="#" class="bg-white text-gray-900 px-6 py-2 uppercase tracking-wider">Ver Coleção</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Coleção Éden</h3>
+                        <p class="text-gray-600 mb-4">Inspirada na beleza pura e orgânica da natureza</p>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Éden')">
+                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Collection 3 -->
+                <div class="bg-white shadow-md rounded overflow-hidden group">
+                    <div class="relative">
+                        <img src="https://placehold.co/800x1000" alt="Stack of minimalist bracelets in rose gold on a marble background with styling props" class="w-full h-96 object-cover" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <a href="#" class="bg-white text-gray-900 px-6 py-2 uppercase tracking-wider">Ver Coleção</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Coleção Nocturne</h3>
+                        <p class="text-gray-600 mb-4">Mistério e elegância para suas noites especiais</p>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Nocturne')">
+                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <img src="https://placehold.co/800x600" alt="Professional jeweler working on delicate pieces in a well-lit luxury workshop" class="rounded-lg shadow-xl" />
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Nossa <span class="brand-gold">Essência</span></h2>
+                    <p class="text-gray-600 mb-6">Na LUAR, transformamos metais nobres em expressões de elegância. Cada peça é cuidadosamente elaborada por artesãos especializados, combinando técnicas tradicionais com design contemporâneo.</p>
+                    <p class="text-gray-600 mb-8">Utilizamos apenas materiais da mais alta qualidade, garantindo durabilidade e brilho que resistem ao tempo, sem o peso do preço das joias finas.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 brand-gold"><i class="fas fa-gem"></i></div>
+                            <div>
+                                <h4 class="font-bold mb-2">Material Premium</h4>
+                                <p class="text-gray-600 text-sm">Banho de ouro 18k e pedras de alta qualidade</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 brand-gold"><i class="fas fa-award"></i></div>
+                            <div>
+                                <h4 class="font-bold mb-2">Garantia LUAR</h4>
+                                <p class="text-gray-600 text-sm">12 meses contra defeitos de fabricação</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 brand-gold"><i class="fas fa-heart"></i></div>
+                            <div>
+                                <h4 class="font-bold mb-2">Produção Ética</h4>
+                                <p class="text-gray-600 text-sm">Respeito ao meio ambiente e condições justas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 brand-gold"><i class="fas fa-shipping-fast"></i></div>
+                            <div>
+                                <h4 class="font-bold mb-2">Entrega Rápida</h4>
+                                <p class="text-gray-600 text-sm">Envio expresso para todo o Brasil</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="inline-block border-2 border-gray-900 text-gray-900 px-8 py-3 uppercase tracking-wider hover:bg-gray-900 hover:text-white transition duration-300">Nossa História</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Destaques <span class="brand-gold">LUAR</span></h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Peças exclusivas selecionadas para você</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded overflow-hidden shadow-sm group product-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x800" alt="Modern statement necklace with layered gold chains and delicate pendant, displayed on black velvet" class="w-full h-80 object-cover" />
+                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0">
+                            <button class="bg-white text-gray-900 px-4 py-2 uppercase text-xs tracking-wider">Ver detalhes</button>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 text-xs uppercase">Oferta</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Colar Serpentina</h3>
+                        <p class="text-sm text-gray-600 mb-2">Coleção Nocturne</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900">R$ 589,90</span>
+                            <span class="text-xs line-through text-gray-500">R$ 789,90</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded overflow-hidden shadow-sm group product-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x800" alt="Elegant pair of hoop earrings with intricate filigree details and sparkling accent stones" class="w-full h-80 object-cover" />
+                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0">
+                            <button class="bg-white text-gray-900 px-4 py-2 uppercase text-xs tracking-wider">Ver detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Brincos Aurora</h3>
+                        <p class="text-sm text-gray-600 mb-2">Coleção Aurora</p>
+                        <div class="font-bold text-gray-900">R$ 429,90</div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded overflow-hidden shadow-sm group product-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x800" alt="Chic minimalist ring set featuring three delicate bands that can be worn together or separately" class="w-full h-80 object-cover" />
                         <div class="product-overlay absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0">
                             <button class="bg-white text-gray-900 px-4 py-2 uppercase text-xs tracking-wider">Ver detalhes</button>
                         </div>
@@ -28,6 +300,7 @@
             </div>
         </div>
     </section>
+
     <!-- Finalizar Compra -->
     <section id="checkout" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
