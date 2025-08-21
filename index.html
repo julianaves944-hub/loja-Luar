@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUAR | Semi-Jóias de Luxo</title>
+    <title>luar | Semi-Jóias </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://sdk.mercadopago.com/js/v2"></script> <!-- SDK do Mercado Pago -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap');
         
@@ -48,20 +47,6 @@
         .brand-gold {
             color: #d4b785;
         }
-
-        /* Styles for the cart */
-        .cart {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border: 1px solid #d4b785;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: none; /* Hidden by default */
-            z-index: 1000;
-        }
     </style>
 </head>
 <body class="bg-white">
@@ -69,28 +54,20 @@
     <header class="fixed w-full z-50 bg-white shadow-sm">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-3xl font-bold brand-gold">LUAR</div>
+                <div class="text-3xl font-bold brand-gold">luar</div>
                 
                 <nav class="hidden md:flex space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-gray-900">Início</a>
                     <a href="#collection" class="nav-link text-gray-700 hover:text-gray-900">Coleções</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-gray-900">Sobre</a>
+                    <a href="#testimonials" class="nav-link text-gray-700 hover:text-gray-900">Depoimentos</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-gray-900">Contato</a>
                 </nav>
                 
                 <div class="flex items-center space-x-4">
                     <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fas fa-search"></i></a>
                     <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fas fa-user"></i></a>
-                    <div class="relative">
-                        <button id="cart-button" class="text-gray-700 hover:text-gray-900">
-                            <i class="fas fa-shopping-bag"></i>
-                        </button>
-                        <div id="cart" class="cart">
-                            <h4 class="font-bold">Itens no Carrinho</h4>
-                            <ul id="cart-items" class="text-gray-600"></ul>
-                            <button id="checkout-button" class="mt-2 bg-brand-gold text-white px-4 py-2 rounded">Finalizar Compra</button>
-                        </div>
-                    </div>
+                    <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fas fa-shopping-bag"></i></a>
                     <button class="md:hidden text-gray-700 focus:outline-none">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -132,9 +109,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Coleção Aurora</h3>
                         <p class="text-gray-600 mb-4">Peças que capturam a luz como o nascer do sol</p>
-                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Aurora')">
-                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
-                        </a>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center">Saiba mais <i class="fas fa-arrow-right ml-2"></i></a>
                     </div>
                 </div>
                 
@@ -149,9 +124,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Coleção Éden</h3>
                         <p class="text-gray-600 mb-4">Inspirada na beleza pura e orgânica da natureza</p>
-                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Éden')">
-                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
-                        </a>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center">Saiba mais <i class="fas fa-arrow-right ml-2"></i></a>
                     </div>
                 </div>
                 
@@ -166,9 +139,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Coleção Nocturne</h3>
                         <p class="text-gray-600 mb-4">Mistério e elegância para suas noites especiais</p>
-                        <a href="#" class="brand-gold font-medium inline-flex items-center" onclick="addToCart('Coleção Nocturne')">
-                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
-                        </a>
+                        <a href="#" class="brand-gold font-medium inline-flex items-center">Saiba mais <i class="fas fa-arrow-right ml-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -198,7 +169,7 @@
                         <div class="flex items-start">
                             <div class="text-2xl mr-4 brand-gold"><i class="fas fa-award"></i></div>
                             <div>
-                                <h4 class="font-bold mb-2">Garantia LUAR</h4>
+                                <h4 class="font-bold mb-2">Garantia luar</h4>
                                 <p class="text-gray-600 text-sm">12 meses contra defeitos de fabricação</p>
                             </div>
                         </div>
@@ -228,7 +199,7 @@
     <section class="py-20 bg-gray-100">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Destaques <span class="brand-gold">LUAR</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Destaques <span class="brand-gold">luar</span></h2>
                 <p class="max-w-2xl mx-auto text-gray-600">Peças exclusivas selecionadas para você</p>
             </div>
             
@@ -298,77 +269,131 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-gray-900 text-white px-8 py-3 uppercase tracking-wider hover:bg-opacity-90 transition duration-300">Ver Todas as Peças</a>
+            </div>
         </div>
     </section>
 
-    <!-- Finalizar Compra -->
-    <section id="checkout" class="py-20 bg-gray-50">
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-<script>
-    // Array para armazenar os itens do carrinho
-    let cartItems = [];
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="brand-gold">sobre nós</span></h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Depoimentos de clientes que brilham com nossas peças</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Minhas peças da LUAR recebem elogios constantes. A qualidade é impressionante e o brilho permanece como no primeiro dia, mesmo após meses de uso."</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/80x80" alt="Portrait of satisfied female customer in her 30s wearing LUMINA jewelry with a happy smile" class="w-12 h-12 rounded-full object-cover mr-4" />
+                        <div>
+                            <h4 class="font-bold">Camila R.</h4>
+                            <p class="text-sm text-gray-500">São Paulo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Como fashionista, sou muito exigente com acessórios. As peças da LUAR têm um design único que complementa perfeitamente meus looks high-end."</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/80x80" alt="Portrait of stylish woman in black blazer with statement necklace from LUMINA collection" class="w-12 h-12 rounded-full object-cover mr-4" />
+                        <div>
+                            <h4 class="font-bold">Fernanda T.</h4>
+                            <p class="text-sm text-gray-500">minas gerais</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Comprei um colar para minha esposa e ela adorou! O acabamento é impecável e o atendimento foi excepcional. Voltaremos com certeza!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/80x80" alt="Portrait of happy male customer in casual shirt holding LUMINA jewelry gift box" class="w-12 h-12 rounded-full object-cover mr-4" />
+                        <div>
+                            <h4 class="font-bold">Roberto S.</h4>
+                            <p class="text-sm text-gray-500">Belo Horizonte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Botões e elementos do carrinho
-    const cartButton = document.getElementById("cart-button");
-    const cart = document.getElementById("cart");
-    const cartList = document.getElementById("cart-items");
-    const checkoutButton = document.getElementById("checkout-button");
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Junte-se ao nosso <span class="brand-gold">universo</span></h2>
+            <p class="max-w-2xl mx-auto mb-8">Receba novidades exclusivas, lançamentos e ofertas especiais diretamente no seu e-mail.</p>
+            
+            <form class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Seu e-mail" class="flex-grow px-4 py-3 rounded-l focus:outline-none text-gray-900" />
+                <button type="submit" class="bg-brand-gold text-gray-900 px-6 py-3 rounded-r font-medium hover:bg-opacity-90 transition duration-300">Assinar</button>
+            </form>
+            
+            <p class="text-xs mt-4 text-gray-400">Respeitamos sua privacidade. Você pode cancelar a qualquer momento.</p>
+        </div>
+    </section>
 
-    // Mostrar/ocultar carrinho
-    cartButton.addEventListener("click", () => {
-        cart.style.display = cart.style.display === "block" ? "none" : "block";
-    });
-
-    // Função para adicionar item ao carrinho
-    function addToCart(productName, price = 0) {
-        cartItems.push({ name: productName, price: price });
-        renderCart();
-    }
-
-    // Renderizar carrinho
-    function renderCart() {
-        cartList.innerHTML = "";
-        let total = 0;
-
-        cartItems.forEach((item, index) => {
-            total += item.price;
-            const li = document.createElement("li");
-            li.classList.add("flex", "justify-between", "items-center", "py-1");
-
-            li.innerHTML = `
-                <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
-                <button onclick="removeFromCart(${index})" class="text-red-500 text-sm">x</button>
-            `;
-            cartList.appendChild(li);
-        });
-
-        // Mostrar total
-        if (cartItems.length > 0) {
-            const totalLi = document.createElement("li");
-            totalLi.classList.add("font-bold", "mt-2");
-            totalLi.textContent = "Total: R$ " + total.toFixed(2);
-            cartList.appendChild(totalLi);
-        } else {
-            cartList.innerHTML = "<li class='text-gray-500'>Carrinho vazio</li>";
-        }
-    }
-
-    // Remover item do carrinho
-    function removeFromCart(index) {
-        cartItems.splice(index, 1);
-        renderCart();
-    }
-
-    // Simular checkout
-    checkoutButton.addEventListener("click", () => {
-        if (cartItems.length === 0) {
-            alert("Seu carrinho está vazio!");
-        } else {
-            alert("Finalizando compra de " + cartItems.length + " item(s).");
-            // Aqui depois você conecta ao Mercado Pago
-        }
-    });
-
-    // Expor função global para os botões
-    window.addToCart = addToCart;
-</script>
+    <!-- Contact/Footer -->
+    <footer id="contact" class="bg-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 brand-gold">LUAR</h3>
+                    <p class="text-gray-600 mb-4">Semi-jóias refinadas que celebram a beleza e a elegância em cada detalhe.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-700 hover:text-gray-900"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Navegação</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-600 hover:text-gray-900">Início</a></li>
+                        <li><a href="#collection" class="text-gray-600 hover:text-gray-900">Coleções</a></li>
+                        <li><a href="#about" class="text-gray-600 hover:text-gray-900">Sobre</a></li>
+                        <li><a href="#testimonials" class="text-gray-600 hover:text-gray-900">Depoimentos</a></li>
+                        <li><a href="#contact" class="text-gray-600 hover:text-gray-900">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Ajuda</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900">Perguntas Frequentes</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900">Trocas e Devoluções</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900">Política de Privacidade</a></li>
