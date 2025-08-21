@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Loja da Julia</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    .produto, .carrinho { background: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
+    button { padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 Loja da Julia</h1>
+
+  <div class="produto">
+    <h2>Pulseira de Prata</h2>
+    <p>R$ 59,90</p>
+    <button onclick="adicionar('Pulseira de Prata', 59.90)">Adicionar ao Carrinho</button>
+  </div>
+
+  <div class="produto">
+    <h2>Colar Dourado</h2>
+    <p>R$ 89,90</p>
+    <button onclick="adicionar('Colar Dourado', 89.90)">Adicionar ao Carrinho</button>
+  </div>
+
+  <div class="carrinho">
+    <h2>🛒 Carrinho</h2>
+    <ul id="lista"></ul>
+    <p><strong>Total:</strong> R$ <span id="total">0.00</span></p>
+    <a id="pagamento" href="#" target="_blank">
+      <button>Finalizar com Mercado Pago</button>
+    </a>
+  </div>
+
+  <script>
+    let carrinho = [];
+    function adicionar(nome, preco) {
+      carrinho.push({ nome, preco });
+      atualizar();
+    }
+
+    function atualizar() {
+      const lista = document.getElementById('lista');
+      const total = document.getElementById('total');
+      lista.innerHTML = '';
+      let soma = 0;
+      carrinho.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+        lista.appendChild(li);
+        soma += item.preco;
+      });
+      total.textContent = soma.toFixed(2);
+
+      // Link de pagamento simulado
+      document.getElementById('pagamento').href = 'https://www.mercadopago.com.br/';
+    }
+  </script>
+
+</body>
+</html>
